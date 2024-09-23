@@ -7,6 +7,7 @@ import './App.css';
       super(props);
       this.state = {
         years: 27,
+        position: '',
       }
     }
 
@@ -21,14 +22,28 @@ import './App.css';
         years: state.years - 1,
       }))
     }
+
+    commitInputChanges = (e, pos) => {
+       this.setState({
+        position: pos + e.target.value,
+       })
+    }
+
   render() {
     const {name, surname} = this.props;
+    const {position, years} = this.state;
     return (
       <div className='App'>
-          <h1>{name} {surname}</h1>
-          <div>{this.state.years}</div>
+          <h1>
+              {name} {surname} {position}
+           </h1>
+          <div>{years}</div>
           <button onClick={this.nextYear}>+</button>
           <button onClick={this.prevYear}>-</button>
+          <form>
+            <span>Введите должность</span>
+            <input type="text" onChange={(e) => this.commitInputChanges(e, 'Position: ')} />
+          </form>
       </div>
       
     )
